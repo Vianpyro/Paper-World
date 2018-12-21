@@ -15,7 +15,7 @@ public class Launcher {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); //Fonction qui detecte les dimentions de l'écran de l'utilisateur
 		width = Math.round((int)screenSize.getWidth() / 5) * 4; //Définition de la largeur de la fenêre en fonction des dimentions de l'écran de l'utilisateur
 		height = Math.round((int)screenSize.getHeight() / 5) * 4; //Définition de la hauteur de la fenêre en fonction des dimentions de l'écran de l'utilisateur
-		SQUARE = width / 32; //Définition de la taille d'une case du jeu en fonction de la largeur de la largeur de la fenêtre 
+		SQUARE = width / 25; //Définition de la taille d'une case du jeu en fonction de la largeur de la largeur de la fenêtre 
 		
 		Game game = new Game("Paper world V:" + versionType + "-" + version, width, height); //Fonction qui appelle la construction du jeu
 		game.start(); //Appelle la méthode "start" de a classe "game" ; qui lancera le jeu

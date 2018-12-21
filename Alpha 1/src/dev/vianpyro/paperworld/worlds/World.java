@@ -2,15 +2,18 @@ package dev.vianpyro.paperworld.worlds;
 
 import java.awt.Graphics;
 
+import dev.vianpyro.paperworld.Game;
 import dev.vianpyro.paperworld.tiles.Tile;
 import dev.vianpyro.paperworld.utils.Utils;
 
 public class World {
 
+	private Game game;
 	private int width, height, spawnX, spawnY;
 	private int[][] tiles;
 	
-	public World(String path) {
+	public World(Game game, String path) {
+		this.game = game;
 		loadWorld(path);
 	}
 	
@@ -21,7 +24,7 @@ public class World {
 	public void render(Graphics g) {
 		for(int y = 0; y < height; y++) {
 			for(int x = 0; x < width; x++) {
-				getTile(x, y).render(g, x * Tile.DEFAULT_TILE_WIDTH, y * Tile.DEFAULT_TILE_HEIGHT);
+				getTile(x, y).render(g, (int)(x * Tile.DEFAULT_TILE_WIDTH - game.getGameCamera().getxOffset()), (int)(y * Tile.DEFAULT_TILE_HEIGHT - game.getGameCamera().getyOffset()));
 			}
 		}
 	}

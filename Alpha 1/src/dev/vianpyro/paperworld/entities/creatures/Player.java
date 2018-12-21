@@ -6,17 +6,15 @@ import dev.vianpyro.paperworld.Game;
 import dev.vianpyro.paperworld.graphics.Assets;
 
 public class Player extends Creature {
-	
-	private Game game;
-	
+		
 	public Player(Game game, float x, float y) {
-		super(x, y, Creature.DEFAULT_ENTITY_WIDTH, Creature.DEFAULT_ENTITY_HEIGHT);
-		this.game = game; //Nécessaire pour avoir accès au "KeyManager"
+		super(game, x, y, Creature.DEFAULT_ENTITY_WIDTH, Creature.DEFAULT_ENTITY_HEIGHT);
 	}
 
 	public void tick() {
 		getInput();
 		move();
+		game.getGameCamera().centerOnEntity(this);
 	}
 	
 	public void getInput() {
@@ -29,6 +27,6 @@ public class Player extends Creature {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(Assets.player, (int)x, (int)y, width, height, null);
+		g.drawImage(Assets.player, (int)(x - game.getGameCamera().getxOffset()), (int)(y - game.getGameCamera().getyOffset()), width, height, null);
 	}
 }

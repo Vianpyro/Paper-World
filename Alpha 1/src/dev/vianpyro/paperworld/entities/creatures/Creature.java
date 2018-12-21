@@ -1,5 +1,6 @@
 package dev.vianpyro.paperworld.entities.creatures;
 
+import dev.vianpyro.paperworld.Game;
 import dev.vianpyro.paperworld.entities.Entity;
 
 public abstract class Creature extends Entity {
@@ -8,8 +9,8 @@ public abstract class Creature extends Entity {
 	
 	protected float health, speed, xMove, yMove;
 	
-	public Creature(float x, float y, int width, int height) {
-		super(x, y, width, height);
+	public Creature(Game game,float x, float y, int width, int height) {
+		super(game, x, y, width, height);
 		health = DEFAULT_HEALTH;
 		speed = DEFAULT_SPEED;
 		xMove = yMove = 0;

@@ -2,16 +2,19 @@ package dev.vianpyro.paperworld.entities;
 
 import java.awt.Graphics;
 
+import dev.vianpyro.paperworld.Game;
 import dev.vianpyro.paperworld.Launcher;
 
 public abstract class Entity {
 
 	public static final int DEFAULT_ENTITY_WIDTH = Launcher.SQUARE, DEFAULT_ENTITY_HEIGHT = Launcher.SQUARE;
 	
+	protected Game game;
 	protected float x, y;
 	protected int width, height;
 	
-	public Entity(float x, float y, int width, int height) {
+	public Entity(Game game, float x, float y, int width, int height) {
+		this.game = game;
 		this.x = x;
 		this.y = y;
 		this.width = width;

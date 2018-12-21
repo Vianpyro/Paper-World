@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 import dev.vianpyro.paperworld.display.Display;
 import dev.vianpyro.paperworld.graphics.Assets;
+import dev.vianpyro.paperworld.graphics.GameCamera;
 import dev.vianpyro.paperworld.inputs.KeyManager;
 import dev.vianpyro.paperworld.states.GameState;
 import dev.vianpyro.paperworld.states.MenuState;
@@ -13,9 +14,9 @@ import dev.vianpyro.paperworld.states.State;
 
 public class Game implements Runnable { //"implements Runnable" pour permettre à cette classe de faire tourner un programme en boucle 
 		
-	public int width, height; //Initialisation des variables de hauteur et largeur de la fenêtre
 	public String title; //Initialisation de la variable du titre de la fenêtre
 	
+	private int width, height; //Initialisation des variables de hauteur et largeur de la fenêtre
 	private Display display; //Création de l'objet d'affichage
 	private Thread thread; //Création d'un mini programme autonome qui fonctionne séparemment de la calsse principale (main)
 	private boolean running = false; //Initialisation de l'état de jeu comme arrêté
@@ -26,6 +27,9 @@ public class Game implements Runnable { //"implements Runnable" pour permettre à
 	private State gameState;
 	private State menuState;
 	private State settingsState;
+	
+	//Camera
+	private GameCamera gameCamera;
 	
 	//Inputs
 	private KeyManager keyManager;
@@ -43,6 +47,7 @@ public class Game implements Runnable { //"implements Runnable" pour permettre à
 		display.getFrame().addKeyListener(keyManager); //On donne l'accès au clavier à la fenêtre
 		Assets.initialisation(); //Initialise les textures du jeu et tous les objets qui en ont une
 		
+		gameCamera = new GameCamera(this, 0, 0);
 		gameState = new GameState(this);
 		menuState = new MenuState(this);
 		settingsState = new SettingsState(this);
@@ -84,6 +89,18 @@ public class Game implements Runnable { //"implements Runnable" pour permettre à
 	
 	public KeyManager getKeyManager() {
 		return keyManager;
+	}
+	
+	public GameCamera getGameCamera() {
+		return gameCamera;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 	
 	private void tick() { //Création de la méthode "tick"
