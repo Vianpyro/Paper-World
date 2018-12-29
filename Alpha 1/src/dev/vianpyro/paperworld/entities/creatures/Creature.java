@@ -6,13 +6,16 @@ import dev.vianpyro.paperworld.tiles.Tile;
 
 public abstract class Creature extends Entity {
 
-	public static final float DEFAULT_SPEED = 1.0f;
+	public static final float DEFAULT_SPEED = 1.0f, DEFAULT_ATTACK_DAMAGES = 1.0f;
+	public static final int DEFAULT_ATTACK_COOLDOWN = 250;
 	
-	protected float speed, xMove, yMove;
+	protected float speed, attackDamages, attackCooldown, xMove, yMove;
 	
 	public Creature(Handler handler, float x, float y, int width, int height) {
 		super(handler, x, y, width, height);
 		speed = DEFAULT_SPEED;
+		attackDamages = DEFAULT_ATTACK_DAMAGES;
+		attackCooldown = DEFAULT_ATTACK_COOLDOWN;
 		xMove = yMove = 0;
 	}
 	

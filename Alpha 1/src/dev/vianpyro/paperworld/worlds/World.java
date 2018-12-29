@@ -6,6 +6,7 @@ import dev.vianpyro.paperworld.Handler;
 import dev.vianpyro.paperworld.Launcher;
 import dev.vianpyro.paperworld.entities.EntityManager;
 import dev.vianpyro.paperworld.entities.creatures.Player;
+import dev.vianpyro.paperworld.entities.statics.structures.Career;
 import dev.vianpyro.paperworld.tiles.Tile;
 import dev.vianpyro.paperworld.utils.Utils;
 
@@ -21,7 +22,7 @@ public class World {
 	public World(Handler handler, String path) {
 		this.handler = handler;
 		entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY));
-//		entityManager.addEntity(new Career(handler, 100, 250));
+		entityManager.addEntity(new Career(handler, 100, 250));
 		
 		loadWorld(path);
 		

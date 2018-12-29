@@ -7,7 +7,7 @@ public class Assets {
 	private static final int width = 16, height = 16; //Définition de la taille des textures
 	
 	public static BufferedImage water, wood, stone, iron, food, dirt, port, sawmill, career, mine, farm, dirt_path; //Création des objets ayants chacuns une texture propre
-	public static BufferedImage[] playerAnim, playerBlack, border, button_start, button_settings; //Création des objets ayants des textures animées
+	public static BufferedImage[] playerAnim, playerBlack, border, button_start, button_settings, button_help, button_feedback; //Création des objets ayants des textures animées
 	
 	public static void initialisation() { //Créatoin de la méthode qui permet de séparer les textures
 
@@ -22,7 +22,9 @@ public class Assets {
 		playerAnim = new BufferedImage[8];
 		button_start = new BufferedImage[2];
 		button_settings = new BufferedImage[2];
-
+		button_help = new BufferedImage[2];
+		button_feedback = new BufferedImage[2];
+		
 		//Génération des textures du joueur
 		playerBlack[0] = playerImages.crop(0, 0, width, height); //Création de la texture de base du joueur
 		playerAnim[0] = playerImages.crop(width, 0, width, height); //Création de la texture animée 1 du joueur
@@ -55,6 +57,10 @@ public class Assets {
 		button_start[1] = ui.crop(0, height * 2, width * 8, height * 2); //Création de la texture bleue du bouton de démarrage
 		button_settings[0] = ui.crop(0, height * 4, width * 8, height * 2); //Création de la texture grise du bouton d'options
 		button_settings[1] = ui.crop(0, height * 6, width * 8, height * 2); //Création de la texture bleue du bouton d'options	
+		button_help[0] = ui.crop(0, height * 8, width * 2, height * 2); //Création de la texture bleue du bouton d'aide
+		button_help[1] = ui.crop(width * 2, height * 8, width * 2, height * 2); //Création de la texture bleue du bouton d'aide
+		button_feedback[0] = ui.crop(width * 4, height * 8, width * 2, height * 2); //Création de la texture bleue du bouton de feedback
+		button_feedback[1] = ui.crop(width * 6, height * 8, width * 2, height * 2); //Création de la texture bleue du bouton de feedback
 	}
 	
 }
