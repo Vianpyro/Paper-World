@@ -1,27 +1,69 @@
 package dev.vianpyro.paperworld.entities.creatures;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import dev.vianpyro.paperworld.Handler;
+import dev.vianpyro.paperworld.graphics.Animation;
 import dev.vianpyro.paperworld.graphics.Assets;
+import dev.vianpyro.paperworld.inputs.KeyManager;
 import dev.vianpyro.paperworld.tiles.Tile;
 
 public class Player extends Creature {
+	
+	//Animation
+	private Animation playerAnim, playerBlack;
 		
 	public Player(Handler handler, float x, float y) {
-		super(handler, x, y, Creature.DEFAULT_ENTITY_WIDTH, Creature.DEFAULT_ENTITY_HEIGHT);
+		super(handler, x, y, Tile.DEFAULT_TILE_WIDTH, Tile.DEFAULT_TILE_HEIGHT);
 		
 		bounds.x = (int)(Tile.DEFAULT_TILE_WIDTH / 25);
 		bounds.y = (int)(Tile.DEFAULT_TILE_HEIGHT / 25);
 		bounds.width = (int)(Tile.DEFAULT_TILE_WIDTH - (bounds.x * 2));
 		bounds.height = (int)(Tile.DEFAULT_TILE_HEIGHT - (bounds.y * 2));
+		
+		//Animation
+		playerBlack = new Animation(0, Assets.playerBlack);
+		playerAnim = new Animation(200, Assets.playerAnim);
 	}
 
 	public void tick() {
+		//Animation
+		playerAnim.tick();
+		
+		//Mouvement
 		getInput();
 		move();
 		handler.getGameCamera().centerOnEntity(this);
+		
+		//Attack
+		checkAttacks();
+	}
+	
+	private void checkAttacks() {
+		Rectangle collisionBounds = getCollisionBounds(0, 0);		
+		Rectangle attackRectangle = new Rectangle();
+		attackRectangle.width = Tile.DEFAULT_TILE_WIDTH;
+		attackRectangle.height = Tile.DEFAULT_TILE_HEIGHT;
+		
+		if(handler.getKeyManager().attack && KeyManager.lookingDirection == 0) {
+			attackRectangle.x = collisionBounds.x + (collisionBounds.width / 2) - (attackRectangle.width / 2);
+			attackRectangle.y = collisionBounds.y - attackRectangle.height;
+		} else if(handler.getKeyManager().attack && KeyManager.lookingDirection == 90) {
+			attackRectangle.x = collisionBounds.x + (collisionBounds.width / 2) - (attackRectangle.width / 2);
+			attackRectangle.y = collisionBounds.y - attackRectangle.height;
+		} else if(handler.getKeyManager().attack && KeyManager.lookingDirection == 180) {
+			attackRectangle.x = collisionBounds.x + (collisionBounds.width / 2) - (attackRectangle.width / 2);
+			attackRectangle.y = collisionBounds.y + collisionBounds.height;
+		} else if(handler.getKeyManager().attack && KeyManager.lookingDirection == 270) {
+			attackRectangle.x = collisionBounds.x - attackRectangle.width;
+			attackRectangle.y = collisionBounds.y - attackRectangle.height;
+		}
+	}
+	
+	public void die() {
+		System.out.println("You died");
 	}
 	
 	public void getInput() {
@@ -34,11 +76,14 @@ public class Player extends Creature {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(Assets.player, (int)(x - handler.getGameCamera().getxOffset()), (int)(y - handler.getGameCamera().getyOffset()), width, height, null);
-		
-		g.setColor(Color.red);
-		g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-				(int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-				bounds.width, bounds.height);
+		g.drawImage(getCurrentAnimationFrame(), (int)(x - handler.getGameCamera().getxOffset()), (int)(y - handler.getGameCamera().getyOffset()), width, height, null);
+	}
+	
+	private BufferedImage getCurrentAnimationFrame() {
+		if(xMove != 0 || yMove != 0) {
+			return playerBlack.getCurrentFrame();
+		} else {
+			return playerAnim.getCurrentFrame();
+		}
 	}
 }

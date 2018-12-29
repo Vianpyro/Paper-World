@@ -6,20 +6,19 @@ import dev.vianpyro.paperworld.tiles.Tile;
 
 public abstract class Creature extends Entity {
 
-	public static final float DEFAULT_HEALTH = 10.0f, DEFAULT_SPEED = 1.0f;
+	public static final float DEFAULT_SPEED = 1.0f;
 	
-	protected float health, speed, xMove, yMove;
+	protected float speed, xMove, yMove;
 	
 	public Creature(Handler handler, float x, float y, int width, int height) {
 		super(handler, x, y, width, height);
-		health = DEFAULT_HEALTH;
 		speed = DEFAULT_SPEED;
 		xMove = yMove = 0;
 	}
 	
 	public void move() {
-		moveX();
-		moveY();
+		if(!checkEntityCollision(xMove, 0f)) {moveX();}
+		if(!checkEntityCollision(0f, yMove)) {moveY();}
 	}
 	
 	public void moveX() {
@@ -29,6 +28,8 @@ public abstract class Creature extends Entity {
 			if(canWalkOnTile(dx, (int)(y + bounds.y) / Tile.DEFAULT_TILE_HEIGHT) && 
 				canWalkOnTile(dx, (int)(y + bounds.y + bounds.height) / Tile.DEFAULT_TILE_HEIGHT)) {
 				x += xMove;
+			} else {
+				x = dx * Tile.DEFAULT_TILE_WIDTH - bounds.x - bounds.width - 1;
 			}
 		} else if(xMove < 0) { //Avance à gauche
 			int dx = (int)(x + xMove + bounds.x) / Tile.DEFAULT_TILE_WIDTH; //Détection de la case en suivant la direction
@@ -36,6 +37,8 @@ public abstract class Creature extends Entity {
 			if(canWalkOnTile(dx, (int)(y + bounds.y) / Tile.DEFAULT_TILE_HEIGHT) && 
 				canWalkOnTile(dx, (int)(y + bounds.y + bounds.height) / Tile.DEFAULT_TILE_HEIGHT)) {
 				x += xMove;
+			} else {
+				x = dx * Tile.DEFAULT_TILE_WIDTH + Tile.DEFAULT_TILE_WIDTH - bounds.x;
 			}
 		}
 	}
@@ -47,6 +50,8 @@ public abstract class Creature extends Entity {
 			if(canWalkOnTile((int)(x + bounds.x) / Tile.DEFAULT_TILE_WIDTH, dy) &&
 				canWalkOnTile((int)(x + bounds.x + bounds.width) / Tile.DEFAULT_TILE_WIDTH, dy)) {
 				y += yMove;
+			} else {
+				y = dy * Tile.DEFAULT_TILE_HEIGHT + Tile.DEFAULT_TILE_HEIGHT - bounds.y;
 			}
 		} else if(yMove > 0) { //Avance en bas
 			int dy = (int)(y + yMove + bounds.y + bounds.height) / Tile.DEFAULT_TILE_HEIGHT;
@@ -54,6 +59,8 @@ public abstract class Creature extends Entity {
 			if(canWalkOnTile((int)(x + bounds.x) / Tile.DEFAULT_TILE_WIDTH, dy) &&
 				canWalkOnTile((int)(x + bounds.x + bounds.width) / Tile.DEFAULT_TILE_WIDTH, dy)) {
 				y += yMove;
+			} else {
+				y = dy * Tile.DEFAULT_TILE_HEIGHT - bounds.y - bounds.height - 1;
 			}
 		}
 	}
