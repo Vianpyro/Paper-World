@@ -1,7 +1,7 @@
 # Paper world
-Paper world is a simple sandbox game, the goal is (in fact : will be) to survive waves of mobs and make a base using the resources of the map.
+**Paper world** is a simple sandbox game, the goal is (in fact : will be) to survive waves of mobs and make a base using the resources of the map.
 ## A "byte" of history
-The first virtual version of the game "Paper world", a game I designed 5 years ago, to play with my brothers, on paper, hence its name.
+The first virtual version of the game **Paper world**, a game I designed 5 years ago, to play with my brothers, on paper, hence its name.
 ## Get started
 Use git or the download button (on the right) to download the game source code.
 ## [Improve it!](https://github.com/WV-Lab/Paper-world/blob/master/CONTRIBUTING.md)
