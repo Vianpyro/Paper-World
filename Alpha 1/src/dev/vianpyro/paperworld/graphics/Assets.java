@@ -38,7 +38,7 @@ public class Assets {
 	
 		//Génération des textures des structures
 		port = structures.crop(0, 0, width, height); //Création de la texture unique du port
-		sawmill = structures.crop(1, 0, width, height); //Création de la texture unique de la scierie
+		sawmill = structures.crop(width, 0, width, height); //Création de la texture unique de la scierie
 		career = structures.crop(width * 2, 0, width, height); //Création de la texture unique de la carrière
 		mine = structures.crop(width * 3, 0, width, height); //Création de la texture unique de la mine
 		farm = structures.crop(width * 4, 0, width, height); //Création de la texture unique de la ferme
