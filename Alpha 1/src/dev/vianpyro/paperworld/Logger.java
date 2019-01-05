@@ -11,16 +11,14 @@ public class Logger {
 
 	private static String date = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss-ms").format(new Date());;
 	private static String time = new SimpleDateFormat("hh:mm:ss").format(new Date());;
-	private static File logFile, gameMainFolder;
+	private static File logFile, mainFolder, logsFolder;
 
 	public static void initialisation() {
 		System.out.println(date);
-		logFile = new File("C://Users/viann/Desktop/" + date + ".log");
-		gameMainFolder = new File("C://Program Files (x86)/Paper game/");
+		System.out.println(System.getProperty("user.name"));
+		createFolders();
 
-		if(!gameMainFolder.exists()) {
-			gameMainFolder.mkdir();
-		}
+		logFile = new File("C:/Users/" + System.getProperty("user.name") + "/AppData/Roaming/.paper_game/logs/" + date + ".log");
 
 		if(!logFile.exists()) {
 			try {
@@ -42,6 +40,18 @@ public class Logger {
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private static void createFolders() {
+		mainFolder = new File("C:/Users/" + System.getProperty("user.name") + "/AppData/Roaming/.paper_game");
+		if(!mainFolder.exists()) {
+			mainFolder.mkdir();
+		}
+		
+		logsFolder = new File("C:/Users/" + System.getProperty("user.name") + "/AppData/Roaming/.paper_game/logs");
+		if(!logsFolder.exists()) {
+			logsFolder.mkdir();
 		}
 	}
 }
