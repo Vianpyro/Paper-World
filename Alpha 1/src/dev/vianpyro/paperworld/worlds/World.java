@@ -7,6 +7,11 @@ import dev.vianpyro.paperworld.Launcher;
 import dev.vianpyro.paperworld.entities.EntityManager;
 import dev.vianpyro.paperworld.entities.creatures.Player;
 import dev.vianpyro.paperworld.entities.statics.structures.Career;
+import dev.vianpyro.paperworld.entities.statics.structures.DirtPath;
+import dev.vianpyro.paperworld.entities.statics.structures.Farm;
+import dev.vianpyro.paperworld.entities.statics.structures.Mine;
+import dev.vianpyro.paperworld.entities.statics.structures.Port;
+import dev.vianpyro.paperworld.entities.statics.structures.Sawmill;
 import dev.vianpyro.paperworld.tiles.Tile;
 import dev.vianpyro.paperworld.utils.Utils;
 
@@ -23,11 +28,14 @@ public class World {
 		this.handler = handler;
 		entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY));
 		entityManager.addEntity(new Career(handler, 1, 1));
+		entityManager.addEntity(new DirtPath(handler, 1, 2));
+		entityManager.addEntity(new Farm(handler, 1, 3));
+		entityManager.addEntity(new Mine(handler, 1, 4));
+		entityManager.addEntity(new Sawmill(handler, 2, 1));
+		entityManager.addEntity(new Port(handler, 3, 1));
+
 		
 		loadWorld(path);
-		
-//		entityManager.getPlayer().setX(spawnX);
-//		entityManager.getPlayer().setY(spawnY);
 	}
 	
 	public void tick() {

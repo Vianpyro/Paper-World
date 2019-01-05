@@ -14,12 +14,7 @@ public class Tile {
 						stoneTile = new Stone(2),
 						ironTile = new Iron(3),
 						foodTile = new Food(4),
-						dirtTile = new Dirt(5),
-						portStructure = new PortStructure(128),
-						sawmillStructure = new SawmillStructure(129),
-						mineStruture = new MineStructure(131),
-						farmStructure = new FarmStructure(132),
-						dirt_pathStructure = new DirtPathStructure(133);
+						dirtTile = new Dirt(5);
 	
 	//CLASSES
 	public static final int DEFAULT_TILE_WIDTH = Launcher.SQUARE, DEFAULT_TILE_HEIGHT = Launcher.SQUARE;
@@ -44,10 +39,6 @@ public class Tile {
 	
 	public boolean isWalkable() {
 		return true;
-	}
-	
-	public boolean isStructure() {
-		return false;
 	}
 	
 	public int getId() {

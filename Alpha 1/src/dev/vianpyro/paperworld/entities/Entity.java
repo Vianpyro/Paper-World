@@ -27,9 +27,9 @@ public abstract class Entity {
 		bounds = new Rectangle(0, 0, width, height);
 	}
 	
+	public abstract void die();
 	public abstract void tick();
 	public abstract void render(Graphics g);
-	public abstract void die();
 	
 	public void hurt(int damages) {
 		health -= damages;
@@ -42,8 +42,12 @@ public abstract class Entity {
 	public boolean checkEntityCollision(float xOffset, float yOffset) {
 		for(Entity e : handler.getWorld().getEntityManager().getEntities()) {
 			if(e.equals(this)) {continue;}
-			if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {return true;}
+			if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)) && !e.isWalkable()) {return true;}
 		}
+		return false;
+	}
+	
+	public boolean isWalkable() {
 		return false;
 	}
 	
