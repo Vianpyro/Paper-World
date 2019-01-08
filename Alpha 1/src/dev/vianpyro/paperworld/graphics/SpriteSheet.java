@@ -5,12 +5,12 @@ import java.awt.image.BufferedImage;
 public class SpriteSheet {
 
 	private BufferedImage sheet;
-	
-	public SpriteSheet(BufferedImage sheet) { //Création de la méthode qui permettra d'avoir accès aux images voulues n'importe quand
+
+	public SpriteSheet(BufferedImage sheet) { //CrÃ©ation de la mÃ©thode qui permettra d'avoir accÃ©s aux images voulues n'importe quand
 		this.sheet = sheet;
 	}
-	
-	public BufferedImage crop(int x, int y, int w, int h) { //Création de la méthode qui permet de découper l'image 
+
+	public BufferedImage crop(int x, int y, int w, int h) { //CrÃ©ation de la mÃ©thode qui permet de dÃ©couper l'image
 		return sheet.getSubimage(x, y, w, h);
 	}
 }

@@ -8,42 +8,42 @@ import javax.swing.JFrame;
 
 public class Display {
 
-	private JFrame frame; //Initialisation de la fenêtre
-	private Canvas canvas; //Objet permetant d'afficher des graphiques sur l'écran	
-	private String title; //Variable utilisée pour le nom de la fenêtre
-	private int width, height; //Variables utilisées pour les dimentions de la fenêtre
-	
+	private JFrame frame; //Initialisation de la fenÃ©tre
+	private Canvas canvas; //Objet permetant d'afficher des graphiques sur l'Ã©cran
+	private String title; //Variable utilisÃ©e pour le nom de la fenÃ©tre
+	private int width, height; //Variables utilisÃ©es pour les dimentions de la fenÃ©tre
+
 	public Display(String title, int width, int height) {
-		this.title = title; //Définition du titre de la fenêtre
-		this.width = width; //Définition de la largeur de la fenêtre
-		this.height = height; //Définition de la hauteur de la fenêtre
+		this.title = title; //DÃ©finition du titre de la fenÃ©tre
+		this.width = width; //DÃ©finition de la largeur de la fenÃ©tre
+		this.height = height; //DÃ©finition de la hauteur de la fenÃ©tre
 		createDisplay(); //Utilisation du constructeur
 	}
-	
+
 	private void createDisplay() {
-		frame = new JFrame(title); //Ajout du titre de la fenêtre à la fenêtre lors de son initialisation
-		frame.setSize(width, height); //Définition des dimentions de la fenêtre 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Fonction qui défini que quand la fenêtre se ferme le programme s'arrête
-		frame.setResizable(false); //Fonction qui empêche de redimsentionner la fenêtre
-		frame.setLocationRelativeTo(null); //Positionnement de la fenêtre au milieu de l'écran
-		frame.setVisible(true); //Affichage la fenêtre 
-		ImageIcon img = new ImageIcon("resources/icon.png"); //Initialisation de l'icon de la fenêtre
-		frame.setIconImage(img.getImage()); //Définition de l'icon de la fenêtre
-		
+		frame = new JFrame(title); //Ajout du titre de la fenÃ©tre Ã© la fenÃ©tre lors de son initialisation
+		frame.setSize(width, height); //DÃ©finition des dimentions de la fenÃ©tre
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Fonction qui dÃ©fini que quand la fenÃ©tre se ferme le programme s'arrÃ©te
+		frame.setResizable(false); //Fonction qui empÃ©che de redimsentionner la fenÃ©tre
+		frame.setLocationRelativeTo(null); //Positionnement de la fenÃ©tre au milieu de l'Ã©cran
+		frame.setVisible(true); //Affichage la fenÃ©tre
+		ImageIcon img = new ImageIcon("resources/icon.png"); //Initialisation de l'icon de la fenÃ©tre
+		frame.setIconImage(img.getImage()); //DÃ©finition de l'icon de la fenÃ©tre
+
 		canvas = new Canvas(); //Initialisation du canvas
-		canvas.setPreferredSize(new Dimension(width, height)); //Définition de la taille voulue de la fenêtre
-		canvas.setMinimumSize(new Dimension(width, height)); //Définition de la taille minimale de la fenêtre pour être certain que la taille du canvas soit la même que celle de la fenêtre
-		canvas.setMaximumSize(new Dimension(width, height)); //Définition de la taille maximale de la fenêtre pour être certain que la taille du canvas soit la même que celle de la fenêtre
+		canvas.setPreferredSize(new Dimension(width, height)); //DÃ©finition de la taille voulue de la fenÃ©tre
+		canvas.setMinimumSize(new Dimension(width, height)); //DÃ©finition de la taille minimale de la fenÃ©tre pour Ã©tre certain que la taille du canvas soit la mÃ©me que celle de la fenÃ©tre
+		canvas.setMaximumSize(new Dimension(width, height)); //DÃ©finition de la taille maximale de la fenÃ©tre pour Ã©tre certain que la taille du canvas soit la mÃ©me que celle de la fenÃ©tre
 		canvas.setFocusable(false);
-		
-		frame.add(canvas); //Ajout du canvas à la fenêtre
-		frame.pack(); //Redimentione légèrement la fenêtre pour permettre de voir entièrement le canvas
+
+		frame.add(canvas); //Ajout du canvas Ã© la fenÃ©tre
+		frame.pack(); //Redimentione lÃ©gÃ©rement la fenÃ©tre pour permettre de voir entiÃ©rement le canvas
 	}
-	
-	public Canvas getCanvas() { //Création de la méthode "getCanvas" pour permettre à d'autres classes de dessiner dessus (sur le canvas)
+
+	public Canvas getCanvas() { //CrÃ©ation de la mÃ©thode "getCanvas" pour permettre Ã© d'autres classes de dessiner dessus (sur le canvas)
 		return canvas;
 	}
-	
+
 	public JFrame getFrame() {
 		return frame;
 	}

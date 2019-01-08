@@ -13,154 +13,154 @@ import dev.vianpyro.paperworld.states.MenuState;
 import dev.vianpyro.paperworld.states.SettingsState;
 import dev.vianpyro.paperworld.states.State;
 
-public class Game implements Runnable { //"implements Runnable" pour permettre à cette classe de faire tourner un programme en boucle 
-		
-	public String title; //Initialisation de la variable du titre de la fenêtre
-	
-	private int width, height; //Initialisation des variables de hauteur et largeur de la fenêtre
-	private Display display; //Création de l'objet d'affichage
-	private Thread thread; //Création d'un mini programme autonome qui fonctionne séparemment de la calsse principale (main)
-	private boolean running = false; //Initialisation de l'état de jeu comme arrêté
-	private BufferStrategy bs; //Initialisation d'une fonction permettant de dire à l'ordinateur comment afficher des choses à l'écran, genre d' "écran invisible" qui permet d'éviter l'effet de clignotement
+public class Game implements Runnable { //"implements Runnable" pour permettre Ã© cette classe de faire tourner un programme en boucle
+
+	public String title; //Initialisation de la variable du titre de la fenÃ©tre
+
+	private int width, height; //Initialisation des variables de hauteur et largeur de la fenÃ©tre
+	private Display display; //CrÃ©ation de l'objet d'affichage
+	private Thread thread; //CrÃ©ation d'un mini programme autonome qui fonctionne sÃ©paremment de la calsse principale (main)
+	private boolean running = false; //Initialisation de l'Ã©tat de jeu comme arrÃ©tÃ©
+	private BufferStrategy bs; //Initialisation d'une fonction permettant de dire Ã© l'ordinateur comment afficher des choses Ã© l'Ã©cran, genre d' "Ã©cran invisible" qui permet d'Ã©viter l'effet de clignotement
 	private Graphics g; //Initialisation d'une fonction permettant de dessiner
-	
-	//États
+
+	//Ã©tats
 	public State gameState, menuState, settingsState;
-	
+
 	//Camera & Handler
 	private GameCamera gameCamera;
 	private Handler handler;
-	
+
 	//Inputs
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
-	
+
 	public Game(String title, int width, int height) {
-		this.width = width; //Définir la variable largeur de la méthode égale à celle de la classe
-		this.height = height; //Définir la variable hauteur de la méthode égale à celle de la classe
-		this.title = title; //Définir la variable du titre de la fenêtre de la méthode égale à celle de la classe
+		this.width = width; //DÃ©finir la variable largeur de la mÃ©thode Ã©gale Ã© celle de la classe
+		this.height = height; //DÃ©finir la variable hauteur de la mÃ©thode Ã©gale Ã© celle de la classe
+		this.title = title; //DÃ©finir la variable du titre de la fenÃ©tre de la mÃ©thode Ã©gale Ã© celle de la classe
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
 	}
-	
-	public void initialization() { //Création de la méthode d'initilaisation du jeu
-		display = new Display(title, width, height); //Fonction qui appelle la construction de la fenêtre
-		display.getFrame().addKeyListener(keyManager); //On donne l'accès au clavier à la fenêtre
-		display.getFrame().addMouseListener(mouseManager); //On donne l'accès à la souris à la fenêtre
-		display.getFrame().addMouseMotionListener(mouseManager); //On donne l'accès à la detection du mouvement de la souris à la fenêtre
-		display.getCanvas().addMouseListener(mouseManager); //On donne l'accès à la souris à la fenêtre
-		display.getCanvas().addMouseMotionListener(mouseManager); //On donne l'accès à la detection du mouvement de la souris à la fenêtre
-		
+
+	public void initialization() { //CrÃ©ation de la mÃ©thode d'initilaisation du jeu
+		display = new Display(title, width, height); //Fonction qui appelle la construction de la fenÃ©tre
+		display.getFrame().addKeyListener(keyManager); //On donne l'accÃ©s au clavier Ã© la fenÃ©tre
+		display.getFrame().addMouseListener(mouseManager); //On donne l'accÃ©s Ã© la souris Ã© la fenÃ©tre
+		display.getFrame().addMouseMotionListener(mouseManager); //On donne l'accÃ©s Ã© la detection du mouvement de la souris Ã© la fenÃ©tre
+		display.getCanvas().addMouseListener(mouseManager); //On donne l'accÃ©s Ã© la souris Ã© la fenÃ©tre
+		display.getCanvas().addMouseMotionListener(mouseManager); //On donne l'accÃ©s Ã© la detection du mouvement de la souris Ã© la fenÃ©tre
+
 		Assets.initialisation(); //Initialise les textures du jeu et tous les objets qui en ont une
 
 		handler = new Handler(this);
 		gameCamera = new GameCamera(handler, 0, 0);
-		
+
 		gameState = new GameState(handler);
 		menuState = new MenuState(handler);
 		settingsState = new SettingsState(handler);
-		State.setCurrentState(menuState); //Défini l'état du jeu comme "en jeu"
+		State.setCurrentState(menuState); //DÃ©fini l'Ã©tat du jeu comme "en jeu"
 	}
 
-	public void run() { //Création de la méthode principal du jeu		
-		
-		initialization(); //Appelle la méthode d'initialisation principale du jeu
+	public void run() { //CrÃ©ation de la mÃ©thode principal du jeu
 
-		final int maxFramesPerSecond = 60; //Création de la limite d'images par secondes affichées dans le jeu ; le nombre de fois qu'on veut lancer le code par seconde
-		double timePerTick = 1000000000 / maxFramesPerSecond; //Définition du temps à attendre en nano secondes entre chaque execution du code
-		double delta = 0; //Définition du temps avant le rappel des méthodes "tick" et "render"
+		initialization(); //Appelle la mÃ©thode d'initialisation principale du jeu
+
+		final int maxFramesPerSecond = 60; //CrÃ©ation de la limite d'images par secondes affichÃ©es dans le jeu ; le nombre de fois qu'on veut lancer le code par seconde
+		double timePerTick = 1000000000 / maxFramesPerSecond; //DÃ©finition du temps Ã© attendre en nano secondes entre chaque execution du code
+		double delta = 0; //DÃ©finition du temps avant le rappel des mÃ©thodes "tick" et "render"
 		long now;
-		long lastTime = System.nanoTime(); //Donne le nombre de nano secondes écoulées depuis le début du jeu
-		long timer = 0; //Temps en nano secondes qui permet de savoir combien de temps s'est écoulé
+		long lastTime = System.nanoTime(); //Donne le nombre de nano secondes Ã©coulÃ©es depuis le dÃ©but du jeu
+		long timer = 0; //Temps en nano secondes qui permet de savoir combien de temps s'est Ã©coulÃ©
 		int ticks = 0; //Compteur d'images par secondes
-		
-		while(running) { //Création de la boucle de jeu
-			now = System.nanoTime(); //Défini la valeur de maintenant égale au nombre de nano secondes écoulées depuis le début du jeu
+
+		while(running) { //CrÃ©ation de la boucle de jeu
+			now = System.nanoTime(); //DÃ©fini la valeur de maintenant Ã©gale au nombre de nano secondes Ã©coulÃ©es depuis le dÃ©but du jeu
 			delta += (now - lastTime) / timePerTick;
 			timer += now - lastTime;
-			lastTime = now; //Défini la valeur du dernier temps égale a maintenant car la dernière execution vient de se produire 
-			
-			if(delta >= 1) { //Quand delta est superieur ou égal à un, il faut executer le programme 
-				tick(); //Execution de la méthode "tick"
-				render(); //Execution de la méthode "render"
+			lastTime = now; //DÃ©fini la valeur du dernier temps Ã©gale a maintenant car la derniÃ©re execution vient de se produire
+
+			if(delta >= 1) { //Quand delta est superieur ou Ã©gal Ã© un, il faut executer le programme
+				tick(); //Execution de la mÃ©thode "tick"
+				render(); //Execution de la mÃ©thode "render"
 				ticks++;
-				delta--; //On enlève un à delta pour ne pas rendre ce code innutile
+				delta--; //On enlÃ©ve un Ã© delta pour ne pas rendre ce code innutile
 			}
-			
+
 			if(timer >= 1000000000) {
 				System.out.println("Ticks : " + ticks);
 				ticks = 0;
 				timer = 0;
 			}
 		}
-		
-		stop(); //Arrêt au cas où running est faux
+
+		stop(); //ArrÃ©t au cas oÃ© running est faux
 	}
-	
+
 	public KeyManager getKeyManager() {
 		return keyManager;
 	}
-	
+
 	public MouseManager getMouseManager() {
 		return mouseManager;
 	}
-	
+
 	public GameCamera getGameCamera() {
 		return gameCamera;
 	}
-	
+
 	public int getWidth() {
 		return width;
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}
-	
-	private void tick() { //Création de la méthode "tick"
+
+	private void tick() { //CrÃ©ation de la mÃ©thode "tick"
 		keyManager.tick();
 
-		if(State.getCurrentState() != null) {State.getCurrentState().tick();} //Si l'état acctuel du jeu est non-nul on execute la méthode "tick" de la classe "State"
+		if(State.getCurrentState() != null) {State.getCurrentState().tick();} //Si l'Ã©tat acctuel du jeu est non-nul on execute la mÃ©thode "tick" de la classe "State"
 	}
-	
-	private void render() { //Création de la méthode "render"
+
+	private void render() { //CrÃ©ation de la mÃ©thode "render"
 		bs = display.getCanvas().getBufferStrategy(); //Initialise le(s) "buffers"
 		if(bs == null) { //Si il n'y a pas de "buffers"
 			display.getCanvas().createBufferStrategy(3); //3 est le nombre de "buffers" maximum
 			return;
 		}
-		
-		g = bs.getDrawGraphics(); //Choix de l'emplacement où dessiner en initialisant "g" qui sera le "pinceau"
-		g.clearRect(0, 0, width, height); //Efface tout ce qui est affiché sur la fenêtredu jeu
+
+		g = bs.getDrawGraphics(); //Choix de l'emplacement oÃ© dessiner en initialisant "g" qui sera le "pinceau"
+		g.clearRect(0, 0, width, height); //Efface tout ce qui est affichÃ© sur la fenÃ©tredu jeu
 		//Draw under!
-		
-		if(State.getCurrentState() != null) {State.getCurrentState().render(g);} //Si l'état acctuel du jeu est non-nul on execute la méthode "render" de la classe "State"
-		
+
+		if(State.getCurrentState() != null) {State.getCurrentState().render(g);} //Si l'Ã©tat acctuel du jeu est non-nul on execute la mÃ©thode "render" de la classe "State"
+
 		//End drawing!
-		bs.show(); //Afficher le resultat du(es) dessin(s) à l'écran 
-		g.dispose(); //Sert à arrêter à coup sûr le(s) dessin(s)
+		bs.show(); //Afficher le resultat du(es) dessin(s) Ã© l'Ã©cran
+		g.dispose(); //Sert Ã© arrÃ©ter Ã© coup sÃ©r le(s) dessin(s)
 	}
-	
-	public synchronized void start() { //Création de la méthode synchronized (en lien directe avec un thread) de commencement du jeu
-		if(running) { //Ne rien faire si le jeu est déjà défini comme lancé
+
+	public synchronized void start() { //CrÃ©ation de la mÃ©thode synchronized (en lien directe avec un thread) de commencement du jeu
+		if(running) { //Ne rien faire si le jeu est dÃ©jÃ© dÃ©fini comme lancÃ©
 			Logger.log("Game already started");
 			return;
-		} 
-		running = true; //Définir le jeu comme lancé
-		thread = new Thread(this); //Initialisation du mini programme autonome qui fonctionne séparemment de la calsse principale (main), de cette classe (this)
-		thread.start(); //Activation du mini programme autonome qui fonctionne séparemment de la calsse principale (main) qui appelle la méthode "run"
+		}
+		running = true; //DÃ©finir le jeu comme lancÃ©
+		thread = new Thread(this); //Initialisation du mini programme autonome qui fonctionne sÃ©paremment de la calsse principale (main), de cette classe (this)
+		thread.start(); //Activation du mini programme autonome qui fonctionne sÃ©paremment de la calsse principale (main) qui appelle la mÃ©thode "run"
 		Logger.log("Game started");
 	}
-	
-	public synchronized void stop() { //Création de la méthode synchronized (en lien directe avec un thread) d'arrêt du jeu
-		if(!running) { //Ne rien faire si le jeu est déjà arrêté
+
+	public synchronized void stop() { //CrÃ©ation de la mÃ©thode synchronized (en lien directe avec un thread) d'arrÃ©t du jeu
+		if(!running) { //Ne rien faire si le jeu est dÃ©jÃ© arrÃ©tÃ©
 			Logger.log("Game already stoped");
 			return;
 		}
-		running = false; //Définir le jeu commme arrêté
+		running = false; //DÃ©finir le jeu commme arrÃ©tÃ©
 		try {
 			Logger.log("Gamed stoped");
-			thread.join(); //Arrête simplement le mini programme autonome qui fonctionne séparemment de la calsse principale (main)
+			thread.join(); //ArrÃ©te simplement le mini programme autonome qui fonctionne sÃ©paremment de la calsse principale (main)
 		} catch (InterruptedException e) {
  			e.printStackTrace();
 		}

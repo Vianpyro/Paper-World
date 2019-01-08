@@ -7,14 +7,14 @@ import javax.imageio.ImageIO;
 
 public class ImageLoader {
 
-	public static BufferedImage loadImage(String path) { //Définir le type d'importation en temps qu'une image
+	public static BufferedImage loadImage(String path) { //DÃ©finir le type d'importation en temps qu'une image
 		try {
-			return ImageIO.read(ImageLoader.class.getResource(path)); //Permet d'importer une image suivant le chemin d'accès "path"
+			return ImageIO.read(ImageLoader.class.getResource(path)); //Permet d'importer une image suivant le chemin d'accÃ©s "path"
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.exit(1); //Si on utilise pas l'image ce programme devient innutile, donc on l'arrête ici
+			System.exit(1); //Si on utilise pas l'image ce programme devient innutile, donc on l'arrÃ©te ici
 		}
-		
-		return null; //Empêche la génération d'erreurs dans le cas où l'image n'est pas importée
+
+		return null; //EmpÃ©che la gÃ©nÃ©ration d'erreurs dans le cas oÃ© l'image n'est pas importÃ©e
 	}
 }
