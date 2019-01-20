@@ -3,3 +3,4 @@ The first step for developing anything, whether its contributing to **Paper worl
 You can install it using the default settings it provides for you. Feel free to change the look and feel to suit your needs, or install some plugins if you wish.
 
 # Forking desired Repository
+You can Fork a repository rather than just clone one as you want ; a fork actually creates a repository on your profile page and is linked to the original project.
